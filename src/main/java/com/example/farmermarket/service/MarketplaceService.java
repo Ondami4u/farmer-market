@@ -45,7 +45,7 @@ public class MarketplaceService {
 	public boolean buyProduct(Long productId, int amount) {
 		Product product = productRepository.findById(productId).orElse(null);
 		if (product == null || product.getQuantity() < amount) {
-			return false;
+			return true;
 		}
 		product.setQuantity(product.getQuantity() - amount);
 		productRepository.save(product);
