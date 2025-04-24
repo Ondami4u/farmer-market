@@ -1,5 +1,6 @@
 package com.example.farmermarket.service;
 
+import com.example.farmermarket.exceptions.FarmerNotFoundException;
 import com.example.farmermarket.model.Client;
 import com.example.farmermarket.model.Farmer;
 import com.example.farmermarket.model.Product;
@@ -32,10 +33,10 @@ public class MarketplaceService {
 	}
 
 	public Product createProduct(Long farmerId, String name, String city, String quality, int quantity, String description) {
-		Farmer farmer = farmerRepository.findById(farmerId).orElse(null);
-		if (farmer == null) {
-			return null;
-		}
+		Farmer farmer = farmerRepository.findById(farmerId).orElseThrow
+				(() -> new FarmerNotFoundException(
+						"Farmer with ID " + farmerId + " not found")
+				);
 		Product product = new Product(name, city, quality, quantity, description);
 		product.setFarmer(farmer);
 		return productRepository.save(product);
