@@ -12,6 +12,7 @@ public class Client {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Name must not be blank")
 	private String name;
 
 	@Email

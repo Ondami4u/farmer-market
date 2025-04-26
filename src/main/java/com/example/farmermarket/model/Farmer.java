@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Farmer {
 
@@ -14,6 +16,7 @@ public class Farmer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Name must not be blank")
 	private String name;
 	
 	@Email
@@ -31,6 +34,7 @@ public class Farmer {
 	}
 
 	@OneToMany(mappedBy = "farmer", cascade = CascadeType.ALL)
+	@JsonManagedReference //main connection side
 	private List<Product> products;
 
 	public Farmer() {

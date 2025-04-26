@@ -5,12 +5,14 @@ import com.example.farmermarket.service.MarketplaceService;
 
 import jakarta.validation.Valid;
 
+import com.example.farmermarket.dto.ProductRequest;
 import com.example.farmermarket.model.*;
+
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PostMapping;
-
 
 @RestController
 @RequestMapping("/api")
@@ -35,23 +37,31 @@ public class MarketplaceController {
 	}
 
 	@PostMapping("/products")
-	public ResponseEntity<Product> createProduct(@RequestParam Long farmerId, @RequestParam String name, @RequestParam String city, @RequestParam String quality, @RequestParam int quantity,
-			@RequestParam String description) {
-		Product product = marketplaceService.createProduct(farmerId, name, city, quality, quantity, description);
+	public ResponseEntity<Product> createProduct(@RequestBody ProductRequest request) {
+		Product product = marketplaceService.createProduct(
+						request.getFarmerId(),
+						request.getName(),
+						request.getCity(),
+						request.getQuality(),
+						request.getQuantity(),
+						request.getDescription()
+						);
 		if (product == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		return ResponseEntity.ok(product);
 	}
+	
+	@GetMapping("/products")
+	public ResponseEntity<List<Product>> getAllProducts() {
+	    List<Product> products = marketplaceService.getAllProducts();
+	    return ResponseEntity.ok(products);
+	}
 
 	@PostMapping("/products/{productId}/buy")
-	public ResponseEntity<String> buyProduct(@PathVariable Long productId, @RequestParam int amount) {
-		boolean success = marketplaceService.buyProduct(productId, amount);
-		if (success) {
-			return ResponseEntity.ok("Purchase successful");
-		} else {
-			return ResponseEntity.badRequest().body("Purchase failed");
-		}
+	public ResponseEntity<Product> buyProduct(@PathVariable Long productId, @RequestParam int amount) {
+		Product updateProduct = marketplaceService.buyProduct(productId, amount);
+		return ResponseEntity.ok(updateProduct);
 	}
 
 	@PostMapping("/register/client")
@@ -59,23 +69,23 @@ public class MarketplaceController {
 		Client registered = marketplaceService.registerClient(client);
 		return ResponseEntity.ok(registered);
 	}
-	
+
 	@PostMapping("/register/farmer")
 	public ResponseEntity<Farmer> registerFarmer(@Valid @RequestBody Farmer farmer) {
 		Farmer registered = marketplaceService.registerFarmer(farmer);
 		return ResponseEntity.ok(registered);
 	}
-	
+
 	@PostMapping("/login/client")
 	public ResponseEntity<Client> loginClient(@RequestParam String email, @RequestParam String password) {
 		Client client = marketplaceService.loginClient(email, password);
 		return ResponseEntity.ok(client);
 	}
-	
+
 	@PostMapping("/login/farmer")
-	public ResponseEntity<Farmer> loginFarmer(@RequestParam String email, @RequestParam String password ) {
+	public ResponseEntity<Farmer> loginFarmer(@RequestParam String email, @RequestParam String password) {
 		Farmer farmer = marketplaceService.loginFarmer(email, password);
 		return ResponseEntity.ok(farmer);
 	}
-	
+
 }

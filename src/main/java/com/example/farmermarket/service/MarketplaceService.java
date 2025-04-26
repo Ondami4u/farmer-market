@@ -76,14 +76,13 @@ public class MarketplaceService {
 		return productRepository.save(product);
 	}
 
-	public boolean buyProduct(Long productId, int amount) {
+	public Product buyProduct(Long productId, int amount) {
 		Product product = productRepository.findById(productId).orElse(null);
 		if (product == null || product.getQuantity() < amount) {
-			return false;
+			throw new RuntimeException("Not enough product available");
 		}
 		product.setQuantity(product.getQuantity() - amount);
-		productRepository.save(product);
-		return true;
+		return productRepository.save(product);
 	}
 
 	public List<Product> getAllProducts() {
