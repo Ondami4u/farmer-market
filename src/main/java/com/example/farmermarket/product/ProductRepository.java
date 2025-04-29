@@ -1,6 +1,5 @@
-package com.example.farmermarket.repository;
+package com.example.farmermarket.product;
 
-import com.example.farmermarket.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

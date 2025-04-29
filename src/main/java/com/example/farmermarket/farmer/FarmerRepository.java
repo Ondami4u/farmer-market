@@ -1,6 +1,4 @@
-package com.example.farmermarket.repository;
-
-import com.example.farmermarket.model.Farmer;
+package com.example.farmermarket.farmer;
 
 import java.util.Optional;
 

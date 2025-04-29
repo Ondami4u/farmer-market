@@ -1,6 +1,6 @@
-package com.example.farmermarket.model;
+package com.example.farmermarket.product;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.farmermarket.farmer.Farmer;
 
 import jakarta.persistence.*;
 
@@ -18,7 +18,6 @@ public class Product {
     private String description;
 
     @ManyToOne
-    @JsonBackReference // stop here do not serealize next
     private Farmer farmer;
 
     public Product() {

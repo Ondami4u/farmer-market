@@ -1,6 +1,4 @@
-package com.example.farmermarket.repository;
-
-import com.example.farmermarket.model.Client;
+package com.example.farmermarket.client;
 
 import java.util.Optional;
 
