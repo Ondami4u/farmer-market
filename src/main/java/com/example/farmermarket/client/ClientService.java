@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.farmermarket.exceptions.UnauthorizedException;
+import com.example.farmermarket.utils.PasswordValidator;
 
 import jakarta.persistence.EntityExistsException;
 
@@ -25,6 +26,7 @@ public class ClientService {
 		Optional<Client> existingClient = clientRepository.findByEmail(client.getEmail());
 		if (existingClient.isPresent())
 			throw new EntityExistsException("Client with this email already exists");
+		PasswordValidator.validate(client.getPassword());
 		return clientRepository.save(client);
 	}
 

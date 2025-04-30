@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.farmermarket.exceptions.UnauthorizedException;
+import com.example.farmermarket.utils.PasswordValidator;
 
 import jakarta.persistence.EntityExistsException;
 
@@ -25,6 +26,7 @@ public class FarmerService {
 		Optional<Farmer> existingFarmer = farmerRepository.findByEmail(farmer.getEmail());
 		if (existingFarmer.isPresent())
 			throw new EntityExistsException("Farmer with this email already exists");
+		PasswordValidator.validate(farmer.getPassword());
 		return farmerRepository.save(farmer);
 	}
 
