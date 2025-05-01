@@ -1,18 +1,18 @@
 package com.example.farmermarket.dto;
 
 public class ProductRequest {
-	private Long farmerId;
+	private String farmerId;
 	private String name;
 	private String city;
 	private String quality;
 	private int quantity;
 	private String description;
 
-	public Long getFarmerId() {
+	public String getFarmerId() {
 		return farmerId;
 	}
 
-	public void setFarmerId(Long farmerId) {
+	public void setFarmerId(String farmerId) {
 		this.farmerId = farmerId;
 	}
 

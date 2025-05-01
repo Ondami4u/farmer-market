@@ -1,26 +1,31 @@
 package com.example.farmermarket.farmer;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Entity
+@Entity(name = "farmers")
 public class Farmer {
 
-	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@Id
+	private String id;
 
-//	@NotBlank(message = "Name must not be blank")
+//@NotBlank(message = "Name must not be blank")
 	private String name;
 	
+
 //	@Email
 //	@NotBlank
 	private String email;
 	
-//	@NotBlank
-//	@Size(min = 6, message = "Password must contain at least 6 characters")
+	//@NotBlank
+	//@Size(min = 6, message = "Password must contain at least 6 characters")
 	private String password;
 
 	public Farmer(String email, String password) {
@@ -36,7 +41,7 @@ public class Farmer {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -58,5 +63,9 @@ public class Farmer {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

@@ -4,7 +4,7 @@ import com.example.farmermarket.product.Product;
 
 public class ProductDto {
 
-	private Long id;
+	private String id;
 	private String name;
 	private String city;
 	private String quality;
@@ -14,7 +14,7 @@ public class ProductDto {
 	public ProductDto() {
 	}
 
-	private ProductDto(Long id, String name, String city, String quality, int quantity, String description) {
+	private ProductDto(String id, String name, String city, String quality, int quantity, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,11 +38,11 @@ public class ProductDto {
 		return product;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

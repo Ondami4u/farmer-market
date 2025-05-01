@@ -4,17 +4,18 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.farmermarket.exceptions.DuplicateEntityException;
 import com.example.farmermarket.exceptions.UnauthorizedException;
 import com.example.farmermarket.utils.PasswordValidator;
-
 import jakarta.persistence.EntityExistsException;
+
 
 @Service
 public class ClientService {
 
 	private final ClientRepository clientRepository;
 
-	private ClientService(ClientRepository clientRepository) {
+	public ClientService(ClientRepository clientRepository) {
 		this.clientRepository = clientRepository;
 	}
 

@@ -1,16 +1,19 @@
 package com.example.farmermarket.dto;
 
 import com.example.farmermarket.farmer.Farmer;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FarmerDto {
 
-	private Long id;
+	private String id;
 	private String name;
 	private String email;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String password;
 	
 	public FarmerDto() {}
 
-	public FarmerDto(Long id, String name, String email) {
+	public FarmerDto(String id, String name, String email) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,14 +32,15 @@ public class FarmerDto {
 		Farmer farmer = new Farmer();
 		farmer.setName(dto.getName());
 		farmer.setEmail(dto.getEmail());
+		farmer.setPassword(dto.getPassword());
 		return farmer;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -54,6 +58,14 @@ public class FarmerDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

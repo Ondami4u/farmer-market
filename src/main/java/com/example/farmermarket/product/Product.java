@@ -1,15 +1,13 @@
 package com.example.farmermarket.product;
 
-import com.example.farmermarket.farmer.Farmer;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.*;
-
-@Entity
+@Document(collection = "products")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String name;
     private String city;
@@ -17,8 +15,8 @@ public class Product {
     private int quantity;
     private String description;
 
-    @ManyToOne
-    private Farmer farmer;
+    
+    private String farmerId;
 
     public Product() {
     }
@@ -32,7 +30,7 @@ public class Product {
     }
 
     
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,7 +46,15 @@ public class Product {
         return quality;
     }
 
-    public int getQuantity() {
+    public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setFarmerId(String farmerId) {
+		this.farmerId = farmerId;
+	}
+
+	public int getQuantity() {
         return quantity;
     }
 
@@ -56,8 +62,8 @@ public class Product {
         return description;
     }
 
-    public Farmer getFarmer() {
-        return farmer;
+    public String getFarmerId() {
+        return farmerId;
     }
 
     public void setName(String name) {
@@ -78,9 +84,5 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setFarmer(Farmer farmer) {
-        this.farmer = farmer;
     }
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.farmermarket.exceptions.UnauthorizedException;
 import com.example.farmermarket.utils.PasswordValidator;
-
+import com.example.farmermarket.exceptions.DuplicateEntityException;
 import jakarta.persistence.EntityExistsException;
 
 @Service
@@ -14,7 +14,7 @@ public class FarmerService {
 
 	private final FarmerRepository farmerRepository;
 
-	private FarmerService(FarmerRepository farmerRepository) {
+	public FarmerService(FarmerRepository farmerRepository) {
 		this.farmerRepository = farmerRepository;
 	}
 
