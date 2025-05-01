@@ -1,13 +1,17 @@
 package com.example.farmermarket.product;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
-@Document(collection = "products")
+import jakarta.persistence.Entity;
+
+@Entity(name = "products")
 public class Product {
 
-    @Id
-    private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String city;
@@ -30,7 +34,7 @@ public class Product {
     }
 
     
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -46,7 +50,7 @@ public class Product {
         return quality;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
 		this.id = id;
 	}
 

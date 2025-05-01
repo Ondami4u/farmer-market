@@ -1,23 +1,25 @@
 package com.example.farmermarket.client;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Entity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@Document(collection = "clients")
+@Entity(name = "clients")
 public class Client {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 //	@NotBlank(message = "Name must not be blank")
 	private String name;
 
-	@Email
-	@NotBlank
+//	@Email
+//	@NotBlank
 	private String email;
 
 //	@NotBlank
@@ -37,7 +39,7 @@ public class Client {
 		this.name = name;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 

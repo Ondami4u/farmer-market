@@ -1,7 +1,6 @@
 package com.example.farmermarket.farmer;
 
-import org.springframework.data.annotation.Id;
-
+import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,9 +11,9 @@ import jakarta.validation.constraints.Size;
 @Entity(name = "farmers")
 public class Farmer {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 //@NotBlank(message = "Name must not be blank")
 	private String name;
@@ -41,7 +40,7 @@ public class Farmer {
 		this.name = name;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
