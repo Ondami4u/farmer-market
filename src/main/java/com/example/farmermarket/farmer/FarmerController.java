@@ -29,7 +29,7 @@ public class FarmerController {
 	}
 
 	@PostMapping("register/farmer")
-	public ResponseEntity<FarmerDto> registerFarmer(@Valid @RequestBody FarmerDto farmerDto) {
+	public ResponseEntity<FarmerDto> registerFarmer(@RequestBody FarmerDto farmerDto) {
 		Farmer farmer = FarmerDto.toEntity(farmerDto);
 		Farmer registered = farmerService.registerFarmer(farmer);
 		FarmerDto responseDto = FarmerDto.fromEntity(registered);

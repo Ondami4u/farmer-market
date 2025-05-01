@@ -12,15 +12,15 @@ public class Client {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Name must not be blank")
+//	@NotBlank(message = "Name must not be blank")
 	private String name;
 
 	@Email
 	@NotBlank
 	private String email;
 
-	@NotBlank
-	@Size(min = 6, message = "Password must contain at least 6 characters")
+//	@NotBlank
+//	@Size(min = 6, message = "Password must contain at least 6 characters")
 	private String password;
 
 	public Client(String email, String password) {

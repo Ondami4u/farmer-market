@@ -10,18 +10,18 @@ public class PasswordValidator {
 	private static final Pattern SPECIAL_SYMBOL_PATTERN = Pattern.compile("[@#$%^&-+=]");
 	
 	public static void validate(String password) {
-		PasswordValidator.validate(password);
 		if(password == null || password.length() < 6)
 			throw new IllegalArgumentException("Password must contain at least 6 symbols");
 		if(!LETTER_PATTERN.matcher(password).find())
 			throw new IllegalArgumentException("Password must contain at least one letter");
 		if(!DIGIT_PATTERN.matcher(password).find())
 			throw new IllegalArgumentException("Password must contain at least one digit");
-		if(!SPACE_PATTERN.matcher(password).find()) 
+		if(SPACE_PATTERN.matcher(password).find()) 
 			throw new IllegalArgumentException("Password must be without any space symbols");
 		if(!SPECIAL_SYMBOL_PATTERN.matcher(password).find())
 			throw new IllegalArgumentException("Password must contain at least one special symbol (@#$%^&-+=)");
 		}
 	}
+	
 	
 

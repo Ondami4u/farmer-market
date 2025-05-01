@@ -26,7 +26,7 @@ public class ClientService {
 		Optional<Client> existingClient = clientRepository.findByEmail(client.getEmail());
 		if (existingClient.isPresent())
 			throw new EntityExistsException("Client with this email already exists");
-		PasswordValidator.validate(client.getPassword());
+		//PasswordValidator.validate(client.getPassword());
 		return clientRepository.save(client);
 	}
 

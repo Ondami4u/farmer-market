@@ -1,6 +1,5 @@
 package com.example.farmermarket.dto;
 
-//not to transfer the entire farmer's property
 public class ProductRequest {
 	private Long farmerId;
 	private String name;

@@ -26,7 +26,7 @@ public class FarmerService {
 		Optional<Farmer> existingFarmer = farmerRepository.findByEmail(farmer.getEmail());
 		if (existingFarmer.isPresent())
 			throw new EntityExistsException("Farmer with this email already exists");
-		PasswordValidator.validate(farmer.getPassword());
+		//PasswordValidator.validate(farmer.getPassword());
 		return farmerRepository.save(farmer);
 	}
 
