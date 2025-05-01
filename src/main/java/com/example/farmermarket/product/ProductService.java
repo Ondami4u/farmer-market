@@ -19,7 +19,7 @@ public class ProductService {
 		this.farmerRepository = farmerRepository;
 	}
 
-	public Product createProduct(String farmerId, String name, String city, String quality, int quantity, String description) {
+	public Product createProduct(Long farmerId, String name, String city, String quality, int quantity, String description) {
 		Farmer farmer = farmerRepository.findById(farmerId)
 				.orElseThrow(() -> new FarmerNotFoundException("Farmer with ID " + farmerId + " not found"));
 		Product product = new Product(name, city, quality, quantity, description);
@@ -27,7 +27,7 @@ public class ProductService {
 		return productRepository.save(product);
 	}
 
-	public Product buyProduct(String productId, int amount) {
+	public Product buyProduct(Long productId, int amount) {
 		Product product = productRepository.findById(productId).orElse(null);
 		if (product == null || product.getQuantity() < amount) {
 			throw new RuntimeException("Not enough product available");

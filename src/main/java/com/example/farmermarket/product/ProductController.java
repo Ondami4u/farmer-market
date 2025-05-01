@@ -51,7 +51,7 @@ public class ProductController {
 	}
 
 	@PostMapping("/products/{productId}/buy")
-	public ResponseEntity<ProductDto> buyProduct(@PathVariable String productId, @RequestParam int amount) {
+	public ResponseEntity<ProductDto> buyProduct(@PathVariable Long productId, @RequestParam int amount) {
 		Product updateProduct = productService.buyProduct(productId, amount);
 		if(updateProduct == null) {
 			return ResponseEntity.badRequest().build();

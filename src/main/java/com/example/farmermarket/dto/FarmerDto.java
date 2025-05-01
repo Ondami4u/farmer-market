@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FarmerDto {
 
-	private String id;
+	private Long id;
 	private String name;
 	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -13,7 +13,7 @@ public class FarmerDto {
 	
 	public FarmerDto() {}
 
-	public FarmerDto(String id, String name, String email) {
+	public FarmerDto(Long id, String name, String email) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -36,11 +36,11 @@ public class FarmerDto {
 		return farmer;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

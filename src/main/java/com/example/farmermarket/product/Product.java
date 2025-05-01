@@ -20,7 +20,7 @@ public class Product {
     private String description;
 
     
-    private String farmerId;
+    private Long farmerId;
 
     public Product() {
     }
@@ -54,7 +54,7 @@ public class Product {
 		this.id = id;
 	}
 
-	public void setFarmerId(String farmerId) {
+	public void setFarmerId(Long farmerId) {
 		this.farmerId = farmerId;
 	}
 
@@ -66,7 +66,7 @@ public class Product {
         return description;
     }
 
-    public String getFarmerId() {
+    public Long getFarmerId() {
         return farmerId;
     }
 

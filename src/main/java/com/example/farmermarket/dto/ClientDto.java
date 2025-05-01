@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ClientDto {
 
-	private String id;
+	private Long id;
 	private String name;
 	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -13,7 +13,7 @@ public class ClientDto {
 	
 	public ClientDto() {}
 
-	private ClientDto(String id, String name, String email) {
+	private ClientDto(Long id, String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -34,11 +34,11 @@ public class ClientDto {
 		return client;
 	}
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
