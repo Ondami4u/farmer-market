@@ -17,7 +17,7 @@ public class FarmerController {
 
 	private final FarmerService farmerService;
 
-	private FarmerController(FarmerService farmerService) {
+	public FarmerController(FarmerService farmerService) {
 		this.farmerService = farmerService;
 	}
 

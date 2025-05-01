@@ -4,17 +4,17 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.farmermarket.exceptions.DuplicateEntityException;
 import com.example.farmermarket.exceptions.UnauthorizedException;
 import com.example.farmermarket.utils.PasswordValidator;
 
-import jakarta.persistence.EntityExistsException;
 
 @Service
 public class ClientService {
 
 	private final ClientRepository clientRepository;
 
-	private ClientService(ClientRepository clientRepository) {
+	public ClientService(ClientRepository clientRepository) {
 		this.clientRepository = clientRepository;
 	}
 
@@ -25,7 +25,7 @@ public class ClientService {
 	public Client registerClient(Client client) {
 		Optional<Client> existingClient = clientRepository.findByEmail(client.getEmail());
 		if (existingClient.isPresent())
-			throw new EntityExistsException("Client with this email already exists");
+			throw new DuplicateEntityException("Client with this email already exists");
 		PasswordValidator.validate(client.getPassword());
 		return clientRepository.save(client);
 	}

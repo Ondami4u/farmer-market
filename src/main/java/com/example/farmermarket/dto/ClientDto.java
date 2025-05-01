@@ -1,16 +1,19 @@
 package com.example.farmermarket.dto;
 
 import com.example.farmermarket.client.Client;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ClientDto {
 
-	private Long id;
+	private String id;
 	private String name;
 	private String email;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String password;
 	
 	public ClientDto() {}
 
-	private ClientDto(Long id, String name, String email) {
+	private ClientDto(String id, String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -27,15 +30,24 @@ public class ClientDto {
 		Client client = new Client();
 		client.setName(dto.getName());
 		client.setEmail(dto.getEmail());
+		client.setPassword(dto.getPassword());
 		return client;
 	}
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getName() {
