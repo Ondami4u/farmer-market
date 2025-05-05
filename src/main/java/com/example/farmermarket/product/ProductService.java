@@ -19,10 +19,9 @@ public class ProductService {
 		this.farmerRepository = farmerRepository;
 	}
 
-	public Product createProduct(Long farmerId, String name, String city, String quality, int quantity, String description) {
-		Farmer farmer = farmerRepository.findById(farmerId)
-				.orElseThrow(() -> new FarmerNotFoundException("Farmer with ID " + farmerId + " not found"));
-		Product product = new Product(name, city, quality, quantity, description);
+	public Product createProduct(Long farmerId, String name, String city, String quality, int quantity, String description, double price) {
+		Farmer farmer = farmerRepository.findById(farmerId).orElseThrow(() -> new FarmerNotFoundException("Farmer with ID " + farmerId + " not found"));
+		Product product = new Product(name, city, quality, quantity, description, price);
 		product.setFarmerId(farmer.getId());
 		return productRepository.save(product);
 	}
@@ -38,6 +37,31 @@ public class ProductService {
 
 	public List<Product> getAllProducts() {
 		return productRepository.findAll();
+	}
+
+	public Product updatePrice(Long productId, double newPrice) {
+		Product product = productRepository.findById(productId).orElse(null);
+		if (product != null) {
+		product.setPrice(newPrice);
+		return productRepository.save(product);
+		}
+		return null;
+	}
+
+	public Product updateDescription(Long productId, String newDescription) {
+		Product product = productRepository.findById(productId).orElse(null);
+		if(product == null)
+			return null;
+		product.setDescription(newDescription);
+		return productRepository.save(product);
+	}
+
+	public boolean deleteProduct(Long productId) {
+		Product product = productRepository.findById(productId).orElse(null);
+		if(product == null)
+			return false;
+		productRepository.deleteById(productId);
+		return true;
 	}
 
 }

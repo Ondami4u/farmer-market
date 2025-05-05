@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.farmermarket.dto.FarmerDto;
+import com.example.farmermarket.dto.FarmerRegisterRequest;
 
 import jakarta.validation.Valid;
 
@@ -29,11 +30,9 @@ public class FarmerController {
 	}
 
 	@PostMapping("register/farmer")
-	public ResponseEntity<FarmerDto> registerFarmer(@RequestBody FarmerDto farmerDto) {
-		Farmer farmer = FarmerDto.toEntity(farmerDto);
-		Farmer registered = farmerService.registerFarmer(farmer);
-		FarmerDto responseDto = FarmerDto.fromEntity(registered);
-		return ResponseEntity.ofNullable(responseDto);
+	public ResponseEntity<FarmerDto> registerFarmer(@RequestBody FarmerRegisterRequest request) {
+		FarmerDto responseDto = farmerService.registerFarmer(request);
+		return ResponseEntity.ok(responseDto);
 	}
 	
 	@PostMapping("login/farmer")

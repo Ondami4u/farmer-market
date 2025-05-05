@@ -18,19 +18,31 @@ public class Product {
     private String quality;
     private int quantity;
     private String description;
+    private double price;
 
     
-    private Long farmerId;
+    public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	private Long farmerId;
 
     public Product() {
     }
 
-    public Product(String name, String city, String quality, int quantity, String description) {
+    public Product(String name, String city,
+    		String quality, int quantity,
+    		String description, double price) {
         this.name = name;
         this.city = city;
         this.quality = quality;
         this.quantity = quantity;
         this.description = description;
+        this.price = price;
     }
 
     

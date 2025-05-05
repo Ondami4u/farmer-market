@@ -10,11 +10,15 @@ public class ProductDto {
 	private String quality;
 	private int quantity;
 	private String description;
+	private double price;
 
 	public ProductDto() {
 	}
 
-	private ProductDto(Long id, String name, String city, String quality, int quantity, String description) {
+	private ProductDto(Long id, String name,
+			String city, String quality,
+			int quantity, String description,
+			double price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -22,10 +26,26 @@ public class ProductDto {
 		this.quality = quality;
 		this.quantity = quantity;
 		this.description = description;
+		this.price = price;
 	}
 
 	public static ProductDto fromEntity(Product product) {
-		return new ProductDto(product.getId(), product.getName(), product.getCity(), product.getQuality(), product.getQuantity(), product.getDescription());
+		return new ProductDto(
+				product.getId(),
+				product.getName(),
+				product.getCity(),
+				product.getQuality(),
+				product.getQuantity(),
+				product.getDescription(),
+				product.getPrice());
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 	public static Product toEntity(ProductDto dto) {
@@ -35,6 +55,7 @@ public class ProductDto {
 		product.setQuality(dto.getQuality());
 		product.setQuantity(dto.getQuantity());
 		product.setDescription(dto.getDescription());
+		product.setPrice(dto.getPrice());
 		return product;
 	}
 

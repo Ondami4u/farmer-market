@@ -7,6 +7,15 @@ public class ProductRequest {
 	private String quality;
 	private int quantity;
 	private String description;
+	private double price;
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public Long getFarmerId() {
 		return farmerId;

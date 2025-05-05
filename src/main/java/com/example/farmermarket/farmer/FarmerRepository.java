@@ -9,6 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface FarmerRepository extends JpaRepository<Farmer, Long> {
 
 	Optional<Farmer> findByEmail(String email);
-
-	Optional<Farmer> findByEmailAndPassword(String email, String password);
 }

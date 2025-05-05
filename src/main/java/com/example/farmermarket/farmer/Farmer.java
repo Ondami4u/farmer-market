@@ -1,7 +1,17 @@
 package com.example.farmermarket.farmer;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.example.farmermarket.security.Role;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.Email;
@@ -27,14 +37,20 @@ public class Farmer {
 	//@Size(min = 6, message = "Password must contain at least 6 characters")
 	private String password;
 
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "farmer_roles",
+	joinColumns = @JoinColumn(name = "farmer_id"),
+	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+
 	public Farmer(String email, String password) {
 		super();
 		this.email = email;
 		this.password = password;
 	}
 
-	public Farmer() {
-	}
+	public Farmer() {}
 
 	public Farmer(String name) {
 		this.name = name;
@@ -67,4 +83,13 @@ public class Farmer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
 }
