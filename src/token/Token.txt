@@ -1,0 +1,24 @@
+package token;
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Token {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String token;
+    private boolean expired;
+    private boolean revoked;
+
+    @ManyToOne
+    private Farmer user;
+
+    public Token(String token, boolean expired, boolean revoked, Farmer user) {
+        this.token = token;
+        this.expired = expired;
+        this.revoked = revoked;
+        this.user = user;
+    }
+}
