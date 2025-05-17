@@ -1,0 +1,48 @@
+package auth;
+@Service
+@RequiredArgsConstructor
+public class AuthenticationService {
+
+    private final FarmerRepository farmerRepo;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final TokenRepository tokenRepo;
+
+    public AuthenticationResponse register(RegisterRequest request) {
+        Farmer farmer = new Farmer();
+        farmer.setEmail(request.email());
+        farmer.setName(request.name());
+        farmer.setPassword(passwordEncoder.encode(request.password()));
+        farmerRepo.save(farmer);
+
+        String jwt = jwtService.generateToken(farmer);
+        saveUserToken(farmer, jwt);
+        return new AuthenticationResponse(jwt);
+    }
+
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        Farmer farmer = farmerRepo.findByEmail(request.email())
+                .orElseThrow(() -> new UsernameNotFoundException("Not found"));
+        if (!passwordEncoder.matches(request.password(), farmer.getPassword()))
+            throw new BadCredentialsException("Invalid credentials");
+
+        String jwt = jwtService.generateToken(farmer);
+        revokeAllUserTokens(farmer);
+        saveUserToken(farmer, jwt);
+        return new AuthenticationResponse(jwt);
+    }
+
+    private void saveUserToken(Farmer farmer, String jwt) {
+        Token token = new Token(jwt, false, false, farmer);
+        tokenRepo.save(token);
+    }
+
+    private void revokeAllUserTokens(Farmer farmer) {
+        List<Token> validTokens = tokenRepo.findAllValidTokenByUser(farmer.getId());
+        for (Token t : validTokens) {
+            t.setExpired(true);
+            t.setRevoked(true);
+        }
+        tokenRepo.saveAll(validTokens);
+    }
+}
