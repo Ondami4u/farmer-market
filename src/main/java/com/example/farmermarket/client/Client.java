@@ -1,12 +1,19 @@
 package com.example.farmermarket.client;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.example.farmermarket.security.Role;
+
 import jakarta.persistence.Entity;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.persistence.FetchType;
 
 @Entity(name = "clients")
 public class Client {
@@ -14,17 +21,15 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-//	@NotBlank(message = "Name must not be blank")
 	private String name;
-
-//	@Email
-//	@NotBlank
 	private String email;
-
-//	@NotBlank
-//	@Size(min = 6, message = "Password must contain at least 6 characters")
 	private String password;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "client_roles",
+	joinColumns = @JoinColumn(name = "client_id"),
+	inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
 
 	public Client(String email, String password) {
 		super();
@@ -32,7 +37,14 @@ public class Client {
 		this.password = password;
 	}
 
-	public Client() {
+	public Client() {}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public Client(String name) {

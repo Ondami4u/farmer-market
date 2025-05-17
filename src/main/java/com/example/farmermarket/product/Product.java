@@ -1,10 +1,15 @@
 package com.example.farmermarket.product;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import com.example.farmermarket.farmer.Farmer;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 
 @Entity(name = "products")
 public class Product {
@@ -19,17 +24,9 @@ public class Product {
     private int quantity;
     private String description;
     private double price;
-
-    
-    public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	private Long farmerId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "farmer_id")
+    private Farmer farmer;
 
     public Product() {
     }
@@ -66,8 +63,12 @@ public class Product {
 		this.id = id;
 	}
 
-	public void setFarmerId(Long farmerId) {
-		this.farmerId = farmerId;
+	public Farmer getFarmer() {
+		return farmer;
+	}
+
+	public void setFarmer(Farmer farmer) {
+		this.farmer = farmer;
 	}
 
 	public int getQuantity() {
@@ -76,10 +77,6 @@ public class Product {
 
     public String getDescription() {
         return description;
-    }
-
-    public Long getFarmerId() {
-        return farmerId;
     }
 
     public void setName(String name) {
@@ -101,4 +98,12 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 }

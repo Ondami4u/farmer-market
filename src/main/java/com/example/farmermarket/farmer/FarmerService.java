@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.farmermarket.exceptions.UnauthorizedException;
 import com.example.farmermarket.security.RoleRepository;
-import com.example.farmermarket.utils.PasswordValidator;
 import com.example.farmermarket.dto.FarmerDto;
 import com.example.farmermarket.dto.FarmerRegisterRequest;
-import com.example.farmermarket.exceptions.DuplicateEntityException;
 import com.example.farmermarket.security.Role;
 
 @Service

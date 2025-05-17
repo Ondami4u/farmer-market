@@ -14,9 +14,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity(name = "farmers")
 public class Farmer {
@@ -25,16 +22,8 @@ public class Farmer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//@NotBlank(message = "Name must not be blank")
 	private String name;
-	
-
-//	@Email
-//	@NotBlank
 	private String email;
-	
-	//@NotBlank
-	//@Size(min = 6, message = "Password must contain at least 6 characters")
 	private String password;
 
 	

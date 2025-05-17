@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.farmermarket.dto.FarmerDto;
 import com.example.farmermarket.dto.FarmerRegisterRequest;
 
-import jakarta.validation.Valid;
-
 @RestController
 @RequestMapping("/api")
 public class FarmerController {

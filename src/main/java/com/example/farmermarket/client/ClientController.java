@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.farmermarket.dto.ClientDto;
-
-import jakarta.validation.Valid;
+import com.example.farmermarket.dto.ClientRegisterRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -29,10 +28,8 @@ public class ClientController {
 	}
 
 	@PostMapping("/register/client")
-	public ResponseEntity<ClientDto> registerClient(@RequestBody ClientDto clientDto) {
-		Client client = ClientDto.toEntity(clientDto);
-		Client registered = clientService.registerClient(client);
-		ClientDto responseDto = ClientDto.fromEntity(registered);
+	public ResponseEntity<ClientDto> registerClient(@RequestBody ClientRegisterRequest request) {
+		ClientDto responseDto = clientService.registerClient(request);
 		return ResponseEntity.ok(responseDto);
 	}
 
