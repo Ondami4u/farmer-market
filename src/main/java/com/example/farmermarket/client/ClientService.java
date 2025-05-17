@@ -53,4 +53,10 @@ public class ClientService {
 		return client;
 	}
 
+	public ClientDto getClientByEmail(String email) {
+		Client client = clientRepository.findByEmail(email)
+				.orElseThrow(() -> new RuntimeException("Client not found"));
+		return ClientDto.fromEntity(client);
+	}
+
 }

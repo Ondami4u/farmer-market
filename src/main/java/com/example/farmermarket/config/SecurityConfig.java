@@ -32,7 +32,7 @@ public class SecurityConfig {
             .formLogin(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/register/**", "/api/login/**").permitAll()
+                .requestMatchers("/api/*/register", "/api/login/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/products/create").hasRole("FARMER")
                 .requestMatchers(HttpMethod.PUT, "/products/{id}")
                     .access((authentic, context) -> new AuthorizationDecision(

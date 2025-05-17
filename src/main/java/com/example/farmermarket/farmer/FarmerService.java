@@ -62,4 +62,10 @@ public class FarmerService {
 		return FarmerDto.fromEntity(farmer);
 	}
 
+	public FarmerDto getFarmerByEmail(String email) {
+		Farmer farmer = farmerRepository.findByEmail(email)
+				.orElseThrow(() -> new RuntimeException("Farmer nor found"));		
+		return FarmerDto.fromEntity(farmer) ;
+	}
+
 }
