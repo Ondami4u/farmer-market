@@ -29,9 +29,9 @@ public class AuthController {
 				new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 		User user = (User) authentication.getPrincipal();
 		String email = user.getUsername();
-		List<String> rolse = user.getAuthorities()
+		List<String> roles = user.getAuthorities()
 				.stream().map(grantedAuthority -> grantedAuthority.getAuthority()).toList();
-		String token = jwtUtils.generateToken(email, rolse);
+		String token = jwtUtils.generateToken(email, roles);
 		return ResponseEntity.ok(token);
 	}
 	
