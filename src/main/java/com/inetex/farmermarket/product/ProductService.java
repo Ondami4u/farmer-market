@@ -1,4 +1,4 @@
-package com.example.farmermarket.product;
+package com.inetex.farmermarket.product;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.farmermarket.exceptions.FarmerNotFoundException;
-import com.example.farmermarket.farmer.Farmer;
-import com.example.farmermarket.farmer.FarmerRepository;
+import com.inetex.farmermarket.exceptions.FarmerNotFoundException;
+import com.inetex.farmermarket.farmer.Farmer;
+import com.inetex.farmermarket.farmer.FarmerRepository;
 
 @Service
 public class ProductService {
@@ -42,28 +42,23 @@ public class ProductService {
 	}
 
 	public Product updatePrice(Long productId, double newPrice) {
-		Product product = productRepository.findById(productId).orElse(null);
-		if (product != null) {
+		Product product = productRepository.findById(productId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 		product.setPrice(newPrice);
 		return productRepository.save(product);
-		}
-		return null;
 	}
 
 	public Product updateDescription(Long productId, String newDescription) {
-		Product product = productRepository.findById(productId).orElse(null);
-		if(product == null)
-			return null;
+		Product product = productRepository.findById(productId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 		product.setDescription(newDescription);
 		return productRepository.save(product);
 	}
 
-	public boolean deleteProduct(Long productId) {
-		Product product = productRepository.findById(productId).orElse(null);
-		if(product == null)
-			return false;
-		productRepository.deleteById(productId);
-		return true;
+	public void deleteProduct(Long productId) {
+		Product product = productRepository.findById(productId).
+				orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
+		productRepository.delete(product);
 	}
 
 }

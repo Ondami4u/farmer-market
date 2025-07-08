@@ -1,4 +1,4 @@
-package com.example.farmermarket.client;
+package com.inetex.farmermarket.client;
 
 import java.util.Optional;
 

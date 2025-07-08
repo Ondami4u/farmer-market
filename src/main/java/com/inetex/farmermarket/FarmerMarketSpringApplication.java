@@ -1,4 +1,4 @@
-package com.example.farmermarket;
+package com.inetex.farmermarket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.example.farmermarket.utils;
+package com.inetex.farmermarket.utils;
 
 import java.util.regex.Pattern;
 

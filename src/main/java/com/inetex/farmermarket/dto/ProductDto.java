@@ -1,7 +1,12 @@
-package com.example.farmermarket.dto;
+package com.inetex.farmermarket.dto;
 
-import com.example.farmermarket.product.Product;
+import com.inetex.farmermarket.product.Product;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ProductDto {
 
 	private Long id;
@@ -15,10 +20,8 @@ public class ProductDto {
 	public ProductDto() {
 	}
 
-	private ProductDto(Long id, String name,
-			String city, String quality,
-			int quantity, String description,
-			double price) {
+	private ProductDto(Long id, String name, String city, String quality,
+			int quantity, String description, double price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,22 +33,7 @@ public class ProductDto {
 	}
 
 	public static ProductDto fromEntity(Product product) {
-		return new ProductDto(
-				product.getId(),
-				product.getName(),
-				product.getCity(),
-				product.getQuality(),
-				product.getQuantity(),
-				product.getDescription(),
-				product.getPrice());
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
+		return new ProductDto(product.getId(), product.getName(), product.getCity(), product.getQuality(), product.getQuantity(), product.getDescription(), product.getPrice());
 	}
 
 	public static Product toEntity(ProductDto dto) {
@@ -57,54 +45,6 @@ public class ProductDto {
 		product.setDescription(dto.getDescription());
 		product.setPrice(dto.getPrice());
 		return product;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getQuality() {
-		return quality;
-	}
-
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 }

@@ -1,7 +1,5 @@
-package com.example.farmermarket.controller;
+package com.inetex.farmermarket.controller;
 
-import com.example.farmermarket.dto.LoginRequest;
-import com.example.farmermarket.security.JwtUtils;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -13,6 +11,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+
+import com.inetex.farmermarket.dto.LoginRequest;
+import com.inetex.farmermarket.security.JwtUtils;
 
 
 @RestController

@@ -1,4 +1,4 @@
-package com.example.farmermarket.product;
+package com.inetex.farmermarket.product;
 
 import java.util.List;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.farmermarket.dto.ProductDto;
-import com.example.farmermarket.dto.ProductRequest;
+import com.inetex.farmermarket.dto.ProductDto;
+import com.inetex.farmermarket.dto.ProductRequest;
 
 @RestController
 @RequestMapping("/api")
@@ -26,7 +26,7 @@ public class ProductController {
 		this.productService = productService;
 	}
 
-	@PostMapping("/products")
+	@PostMapping("/products/create")
 	public ResponseEntity<ProductDto> createProduct(@RequestBody ProductRequest request) {
 		Product product = productService.createProduct(
 				request.getFarmerId(),
@@ -56,9 +56,6 @@ public class ProductController {
 	@PostMapping("/products/{productId}/buy")
 	public ResponseEntity<ProductDto> buyProduct(@PathVariable Long productId, @RequestParam int amount) {
 		Product updateProduct = productService.buyProduct(productId, amount);
-		if(updateProduct == null) {
-			return ResponseEntity.badRequest().build();
-		}
 		ProductDto responseDto = ProductDto.fromEntity(updateProduct);
 		return ResponseEntity.ok(responseDto);
 	}
@@ -66,32 +63,18 @@ public class ProductController {
 	@PostMapping("/products/{productId}/update-price")
 	public ResponseEntity<ProductDto> updateProductPrice(@PathVariable Long productId, @RequestParam double newPrice) {
 		Product updateProduct = productService.updatePrice(productId, newPrice);
-		if(updateProduct == null) {
-			return ResponseEntity.badRequest().build();
-		}
-		ProductDto responseDto = ProductDto.fromEntity(updateProduct);
-		return ResponseEntity.ok(responseDto);
+		return ResponseEntity.ok(ProductDto.fromEntity(updateProduct));
 	}
 	
 	@PutMapping("/products/{productId}/update-description")
 	public ResponseEntity<ProductDto> updateProductDescription(@PathVariable Long productId, @RequestParam String newDescription) {
 		Product updateProduct = productService.updateDescription(productId, newDescription);
-		if(updateProduct == null) {
-			return ResponseEntity.badRequest().build();
-		}
-		ProductDto responseDto = ProductDto.fromEntity(updateProduct);
-		return ResponseEntity.ok(responseDto);
+		return ResponseEntity.ok(ProductDto.fromEntity(updateProduct));
 	}
 	
 	@DeleteMapping("/products/{productId}")
-	public ResponseEntity<ProductDto> deleteProduct(@PathVariable Long productId){
-		boolean deleteProduct = productService.deleteProduct(productId);
-		if(deleteProduct) {
-			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+	public ResponseEntity<Void> deleteProduct(@PathVariable Long productId){
+		productService.deleteProduct(productId);
+		return ResponseEntity.noContent().build();
 	}
-	
-
 }

@@ -1,6 +1,6 @@
-package com.example.farmermarket.dto;
+package com.inetex.farmermarket.dto;
 
-import com.example.farmermarket.farmer.Farmer;
+import com.inetex.farmermarket.farmer.Farmer;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FarmerDto {

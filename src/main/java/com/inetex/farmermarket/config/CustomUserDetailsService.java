@@ -1,4 +1,4 @@
-package com.example.farmermarket.config;
+package com.inetex.farmermarket.config;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.farmermarket.client.Client;
-import com.example.farmermarket.client.ClientRepository;
-import com.example.farmermarket.farmer.Farmer;
-import com.example.farmermarket.farmer.FarmerRepository;
+import com.inetex.farmermarket.client.Client;
+import com.inetex.farmermarket.client.ClientRepository;
+import com.inetex.farmermarket.farmer.Farmer;
+import com.inetex.farmermarket.farmer.FarmerRepository;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

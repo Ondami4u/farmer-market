@@ -1,4 +1,4 @@
-package com.example.farmermarket.farmer;
+package com.inetex.farmermarket.farmer;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.example.farmermarket.dto;
+package com.inetex.farmermarket.dto;
 
 import lombok.Data;
 

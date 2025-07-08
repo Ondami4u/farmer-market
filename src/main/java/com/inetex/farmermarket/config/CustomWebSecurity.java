@@ -1,8 +1,8 @@
-package com.example.farmermarket.config;
+package com.inetex.farmermarket.config;
 
 import org.springframework.stereotype.Component;
 
-import com.example.farmermarket.product.ProductRepository;
+import com.inetex.farmermarket.product.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.example.farmermarket.exceptions;
+package com.inetex.farmermarket.exceptions;
 
 @SuppressWarnings("serial")
 public class UnauthorizedException extends RuntimeException {

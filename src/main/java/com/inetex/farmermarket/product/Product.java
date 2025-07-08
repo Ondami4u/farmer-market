@@ -1,4 +1,4 @@
-package com.example.farmermarket.product;
+package com.inetex.farmermarket.product;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -6,7 +6,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
-import com.example.farmermarket.farmer.Farmer;
+import com.inetex.farmermarket.farmer.Farmer;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

@@ -1,12 +1,13 @@
-package com.example.farmermarket.dto;
+package com.inetex.farmermarket.dto;
 
-import com.example.farmermarket.client.Client;
+import com.inetex.farmermarket.client.Client;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ClientDto {
 
 	private Long id;
 	private String name;
+
 	private String email;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;

@@ -1,0 +1,151 @@
+[1mdiff --git a/src/main/java/com/example/farmermarket/client/Client.java b/src/main/java/com/example/farmermarket/client/Client.java[m
+[1mdeleted file mode 100644[m
+[1mindex daaa7cf..0000000[m
+[1m--- a/src/main/java/com/example/farmermarket/client/Client.java[m
+[1m+++ /dev/null[m
+[36m@@ -1,81 +0,0 @@[m
+[31m-package com.example.farmermarket.client;[m
+[31m-[m
+[31m-import jakarta.persistence.Id;[m
+[31m-import jakarta.persistence.JoinColumn;[m
+[31m-import jakarta.persistence.JoinTable;[m
+[31m-import jakarta.persistence.ManyToMany;[m
+[31m-import jakarta.persistence.GeneratedValue;[m
+[31m-import jakarta.persistence.GenerationType;[m
+[31m-[m
+[31m-import java.util.HashSet;[m
+[31m-import java.util.Set;[m
+[31m-[m
+[31m-import com.example.farmermarket.security.Role;[m
+[31m-[m
+[31m-import jakarta.persistence.Entity;[m
+[31m-import jakarta.persistence.FetchType;[m
+[31m-[m
+[31m-@Entity(name = "clients")[m
+[31m-public class Client {[m
+[31m-[m
+[31m-	@Id[m
+[31m-	@GeneratedValue(strategy = GenerationType.IDENTITY)[m
+[31m-	private Long id;[m
+[31m-	private String name;[m
+[31m-	private String email;[m
+[31m-	private String password;[m
+[31m-	[m
+[31m-	@ManyToMany(fetch = FetchType.EAGER)[m
+[31m-	@JoinTable(name = "client_roles",[m
+[31m-	joinColumns = @JoinColumn(name = "client_id"),[m
+[31m-	inverseJoinColumns = @JoinColumn(name = "role_id"))[m
+[31m-	private Set<Role> roles = new HashSet<>();[m
+[31m-[m
+[31m-	public Client(String email, String password) {[m
+[31m-		super();[m
+[31m-		this.email = email;[m
+[31m-		this.password = password;[m
+[31m-	}[m
+[31m-[m
+[31m-	public Client() {}[m
+[31m-[m
+[31m-	public Set<Role> getRoles() {[m
+[31m-		return roles;[m
+[31m-	}[m
+[31m-[m
+[31m-	public void setRoles(Set<Role> roles) {[m
+[31m-		this.roles = roles;[m
+[31m-	}[m
+[31m-[m
+[31m-	public Client(String name) {[m
+[31m-		this.name = name;[m
+[31m-	}[m
+[31m-[m
+[31m-	public Long getId() {[m
+[31m-		return id;[m
+[31m-	}[m
+[31m-[m
+[31m-	public String getName() {[m
+[31m-		return name;[m
+[31m-	}[m
+[31m-[m
+[31m-	public void setName(String name) {[m
+[31m-		this.name = name;[m
+[31m-	}[m
+[31m-[m
+[31m-	public String getEmail() {[m
+[31m-		return email;[m
+[31m-	}[m
+[31m-[m
+[31m-	public void setEmail(String email) {[m
+[31m-		this.email = email;[m
+[31m-	}[m
+[31m-[m
+[31m-	public String getPassword() {[m
+[31m-		return password;[m
+[31m-	}[m
+[31m-[m
+[31m-	public void setPassword(String password) {[m
+[31m-		this.password = password;[m
+[31m-	}[m
+[31m-}[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/FarmerMarketSpringApplication.java b/src/main/java/com/inetex/farmermarket/FarmerMarketSpringApplication.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/FarmerMarketSpringApplication.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/FarmerMarketSpringApplication.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/client/ClientController.java b/src/main/java/com/inetex/farmermarket/client/ClientController.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/client/ClientController.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/client/ClientController.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/client/ClientRepository.java b/src/main/java/com/inetex/farmermarket/client/ClientRepository.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/client/ClientRepository.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/client/ClientRepository.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/client/ClientService.java b/src/main/java/com/inetex/farmermarket/client/ClientService.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/client/ClientService.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/client/ClientService.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/config/CorsConfig.java b/src/main/java/com/inetex/farmermarket/config/CorsConfig.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/config/CorsConfig.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/config/CorsConfig.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/config/CustomUserDetailsService.java b/src/main/java/com/inetex/farmermarket/config/CustomUserDetailsService.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/config/CustomUserDetailsService.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/config/CustomUserDetailsService.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/config/CustomWebSecurity.java b/src/main/java/com/inetex/farmermarket/config/CustomWebSecurity.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/config/CustomWebSecurity.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/config/CustomWebSecurity.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/config/SecurityConfig.java b/src/main/java/com/inetex/farmermarket/config/SecurityConfig.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/config/SecurityConfig.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/config/SecurityConfig.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/controller/AuthController.java b/src/main/java/com/inetex/farmermarket/controller/AuthController.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/controller/AuthController.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/controller/AuthController.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/ClientDto.java b/src/main/java/com/inetex/farmermarket/dto/ClientDto.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/ClientDto.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/ClientDto.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/ClientRegisterRequest.java b/src/main/java/com/inetex/farmermarket/dto/ClientRegisterRequest.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/ClientRegisterRequest.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/ClientRegisterRequest.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/FarmerDto.java b/src/main/java/com/inetex/farmermarket/dto/FarmerDto.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/FarmerDto.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/FarmerDto.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/FarmerRegisterRequest.java b/src/main/java/com/inetex/farmermarket/dto/FarmerRegisterRequest.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/FarmerRegisterRequest.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/FarmerRegisterRequest.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/LoginRequest.java b/src/main/java/com/inetex/farmermarket/dto/LoginRequest.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/LoginRequest.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/LoginRequest.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/ProductDto.java b/src/main/java/com/inetex/farmermarket/dto/ProductDto.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/ProductDto.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/ProductDto.java[m
+[1mdiff --git a/src/main/java/com/example/farmermarket/dto/ProductRequest.java b/src/main/java/com/inetex/farmermarket/dto/ProductRequest.java[m
+[1msimilarity index 100%[m
+[1mrename from src/main/java/com/example/farmermarket/dto/ProductRequest.java[m
+[1mrename to src/main/java/com/inetex/farmermarket/dto/ProductRequest.java[m

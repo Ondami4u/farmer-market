@@ -1,26 +1,31 @@
-package com.example.farmermarket.config;
+package com.inetex.farmermarket.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.farmermarket.security.JwtAuthFilter;
+import com.inetex.farmermarket.security.JwtAuthFilter;
 
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+
+/**
+ * Enable method-level authorization using @PreAuthorize via @EnableWebSeciroty
+ */
+//@EnableMethodSecurity
 public class SecurityConfig {
 
     private final CustomWebSecurity webSecurity;
@@ -33,13 +38,15 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/*/register", "/api/login/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/products/create").hasRole("FARMER")
-                .requestMatchers(HttpMethod.PUT, "/products/{id}")
-                    .access((authentic, context) -> new AuthorizationDecision(
-                        webSecurity.checkProductAuthor(
-                            context.getVariables().get("id"),
-                            authentic.get().getName())))
-                .requestMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
+                
+                .requestMatchers("/api/products").permitAll()
+                
+                .requestMatchers(HttpMethod.POST, "/api/products/create").hasRole("FARMER")
+                .requestMatchers(HttpMethod.POST, "/api/products/*/buy").hasRole("CLIENT")
+                .requestMatchers(HttpMethod.POST, "/api/products/*/update-price").hasRole("FARMER")
+                .requestMatchers(HttpMethod.PUT, "/api/products/*/update-description").hasRole("FARMER")
+                  
+                .requestMatchers(HttpMethod.DELETE, "/api/products/*").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

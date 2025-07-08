@@ -1,4 +1,4 @@
-package com.example.farmermarket.security;
+package com.inetex.farmermarket.security;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.example.farmermarket.exceptions;
+package com.inetex.farmermarket.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

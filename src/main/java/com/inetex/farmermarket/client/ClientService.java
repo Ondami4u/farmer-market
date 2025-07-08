@@ -1,26 +1,29 @@
-package com.example.farmermarket.client;
+package com.inetex.farmermarket.client;
 
-import java.util.Optional;
+
 import java.util.Set;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.farmermarket.dto.ClientDto;
-import com.example.farmermarket.dto.ClientRegisterRequest;
-import com.example.farmermarket.exceptions.UnauthorizedException;
-import com.example.farmermarket.security.Role;
-import com.example.farmermarket.security.RoleRepository;
+import com.inetex.farmermarket.dto.ClientDto;
+import com.inetex.farmermarket.dto.ClientRegisterRequest;
+import com.inetex.farmermarket.exceptions.UnauthorizedException;
+import com.inetex.farmermarket.farmer.FarmerRepository;
+import com.inetex.farmermarket.security.Role;
+import com.inetex.farmermarket.security.RoleRepository;
 
 @Service
 public class ClientService {
 
 	private final ClientRepository clientRepository;
+	private final FarmerRepository farmerRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final RoleRepository roleRepository;
 
-	public ClientService(ClientRepository clientRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+	public ClientService(ClientRepository clientRepository, FarmerRepository farmerRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
 		this.clientRepository = clientRepository;
+		this.farmerRepository = farmerRepository;
 		this.passwordEncoder = passwordEncoder;
 		this.roleRepository = roleRepository;
 	}
@@ -30,15 +33,17 @@ public class ClientService {
 	}
 
 	public ClientDto registerClient(ClientRegisterRequest request) {
+		if(clientRepository.findByEmail(request.getEmail()).isPresent() 
+				|| farmerRepository.findByEmail(request.getEmail()).isPresent()) {
+			throw new RuntimeException("Email already in use");
+		}
 		Client client = new Client();
 		client.setName(request.getName());
 		client.setEmail(request.getEmail());
 		client.setPassword(passwordEncoder.encode(request.getPassword()));
-		
-		Optional<Client> existing = clientRepository.findByEmail(client.getEmail());
-		if(existing.isPresent())
-			throw new RuntimeException("Client with this email already exists");
-		Role clientRole = roleRepository.findByName("CLIENT").orElseThrow(() -> new RuntimeException("Role CLIENT not found"));
+	
+		Role clientRole = roleRepository.findByName("CLIENT")
+				.orElseThrow(() -> new RuntimeException("Role CLIENT not found"));
 		client.setRoles(Set.of(clientRole));
 		clientRepository.save(client);
 		return ClientDto.fromEntity(client);
